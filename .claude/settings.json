@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/boilerrat/.claude/**)",
+      "Bash(node -e \"var p=require\\('path'\\),f=require\\('fs'\\),h=require\\('os'\\).homedir\\(\\),d=p.join\\(h,'.claude'\\),q=p.join\\('scripts','lib','utils.js'\\);if\\(!f.existsSync\\(p.join\\(d,q\\)\\)\\){try{var b=p.join\\(d,'plugins','cache','everything-claude-code'\\);for\\(var o of f.readdirSync\\(b\\)\\)for\\(var v of f.readdirSync\\(p.join\\(b,o\\)\\)\\){var c=p.join\\(b,o,v\\);if\\(f.existsSync\\(p.join\\(c,q\\)\\)\\){d=c;break}}}catch\\(x\\){}}console.log\\(d\\)\")",
+      "Bash(gh api:*)",
+      "Bash(mkdir -p ~/.claude/scripts/lib)",
+      "Bash(cp /tmp/skills-health.js ~/.claude/scripts/skills-health.js)",
+      "Bash(cp /tmp/utils.js ~/.claude/scripts/lib/utils.js)",
+      "Bash(node ~/.claude/scripts/skills-health.js --dashboard)",
+      "Bash(python3 ~/.claude/skills/continuous-learning-v2/scripts/instinct-cli.py status)",
+      "Bash(mkdir -p ~/.claude/commands-archive)",
+      "Bash(mv '~/.claude/commands/cpp-build.md' '~/.claude/commands/cpp-review.md' '~/.claude/commands/cpp-test.md' '~/.claude/commands/go-build.md' '~/.claude/commands/go-review.md' '~/.claude/commands/go-test.md' '~/.claude/commands/kotlin-build.md' '~/.claude/commands/kotlin-review.md' '~/.claude/commands/kotlin-test.md' '~/.claude/commands/rust-build.md' '~/.claude/commands/rust-review.md' '~/.claude/commands/rust-test.md' '~/.claude/commands/gradle-build.md' '~/.claude/commands/python-review.md' '~/.claude/commands-archive/')",
+      "Bash(mv '~/.claude/commands/multi-backend.md' '~/.claude/commands/multi-execute.md' '~/.claude/commands/multi-workflow.md' '~/.claude/commands/multi-plan.md' '~/.claude/commands/multi-frontend.md' '~/.claude/commands/orchestrate.md' '~/.claude/commands/devfleet.md' '~/.claude/commands/pm2.md' '~/.claude/commands/setup-pm.md' '~/.claude/commands-archive/')",
+      "Bash(mv '~/.claude/commands/tdd.md' '~/.claude/commands/test-coverage.md' '~/.claude/commands/e2e.md' '~/.claude/commands/quality-gate.md' '~/.claude/commands/verify.md' '~/.claude/commands/build-fix.md' '~/.claude/commands/refactor-clean.md' '~/.claude/commands-archive/')",
+      "Bash(mv '~/.claude/commands/update-codemaps.md' '~/.claude/commands/update-docs.md' '~/.claude/commands-archive/')",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(t['path']\\) for t in data.get\\('tree',[]\\) if t['type']=='blob']\")",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(t['name'], t['type']\\) for t in data]\")",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(t['name']\\) for t in data]\")",
+      "Bash(npm install:*)",
+      "Bash(python3 -m json.tool)",
+      "Bash(node -e \" const fs = require\\('fs'\\); const data = fs.readFileSync\\('/dev/stdin', 'utf8'\\); // Find the position 50:1124 means... actually it's a flat file, let me find the require const lines = data.split\\('\\\\n'\\); console.log\\('Total lines:', lines.length\\); if \\(lines[49]\\) { const around = lines[49].substring\\(1100, 1200\\); console.log\\('Line 50 around col 1124:', around\\); } \")",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(npm list:*)",
+      "Bash(xargs cat:*)"
+    ],
+    "additionalDirectories": [
+      "/tmp",
+      "/home/boilerrat/.claude/commands-archive"
+    ]
+  }
+}

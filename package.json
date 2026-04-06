@@ -9,9 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@boilerhaus-ui/boilerhaus-ui": "^0.1.4",
+    "@tailwindcss/postcss": "^4.2.2",
     "next": "16.1.6",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
     "@types/node": "^20",
