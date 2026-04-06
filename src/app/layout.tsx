@@ -1,22 +1,30 @@
 import type { Metadata } from "next";
-import { Figtree, Fraunces } from "next/font/google";
+import { Barlow_Condensed, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const figtree = Figtree({
-  variable: "--font-sans",
+const barlowCondensed = Barlow_Condensed({
+  variable: "--bh-display",
   subsets: ["latin"],
-  weight: ["300", "400"],
+  weight: ["600", "700", "800"],
+  display: "swap",
 });
 
-const fraunces = Fraunces({
-  variable: "--font-serif",
+const dmSans = DM_Sans({
+  variable: "--bh-body",
   subsets: ["latin"],
-  weight: ["300", "400"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "boilerhaus",
-  description: "Ideas, built.",
+  title: "boilerhaus — a development agency for agents",
+  description:
+    "We move ideas to life quickly and safely through guardrails that enable human–AI collaboration and real-world utility.",
+  openGraph: {
+    title: "boilerhaus",
+    description: "A development agency for agents.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -25,8 +33,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${figtree.variable} ${fraunces.variable}`}>{children}</body>
+    <html lang="en">
+      <body className={`${barlowCondensed.variable} ${dmSans.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }

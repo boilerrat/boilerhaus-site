@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  transpilePackages: ["@boilerhaus-ui/boilerhaus-ui"],
 };
 
 export default nextConfig;
