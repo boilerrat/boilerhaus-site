@@ -538,6 +538,20 @@ a {
   color: var(--color-smoke);
 }
 
+.footer-legal-link {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--type-xs);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--color-smoke);
+  transition: color var(--transition-fast);
+}
+
+.footer-legal-link:hover {
+  color: var(--color-void);
+}
+
 /* ── Dark mode: flip agents section to light surface ── */
 [data-theme="dark"] .agents-section {
   background: var(--color-rule);
@@ -626,5 +640,11 @@ a {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-4);
+  }
+
+  .footer-copyright-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3) !important;
   }
 }

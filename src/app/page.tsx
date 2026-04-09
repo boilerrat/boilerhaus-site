@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 // ── Inline Badge ──────────────────────────────────────────────────────────
 function BhBadge({ children }: { children: React.ReactNode }) {
@@ -368,7 +369,11 @@ export default function Home() {
               </a>
             ))}
           </nav>
-          <p className="footer-copyright">&copy; 2026 boilerhaus</p>
+          <div className="footer-copyright-group" style={{ display: "flex", alignItems: "center", gap: "var(--space-5)", flexWrap: "wrap" }}>
+            <Link href="/legal" className="footer-legal-link">Privacy</Link>
+            <Link href="/legal#terms" className="footer-legal-link">Legal</Link>
+            <p className="footer-copyright">&copy; 2026 boilerhaus</p>
+          </div>
         </div>
       </footer>
     </>

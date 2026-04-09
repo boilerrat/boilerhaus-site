@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Boilerhaus Website
 
-## Getting Started
+The public-facing website for [boilerhaus.org](https://boilerhaus.org).
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework:** Next.js 16 (App Router)
+- **Styling:** Tailwind CSS v4, [@boilerhaus-ui/boilerhaus-ui](https://github.com/BoilerHAUS/boilerhaus-ui) design system tokens
+- **Typography:** Barlow Condensed (display), DM Sans (body) — self-hosted via `next/font`
+- **Deployment:** Docker
+
+## Project Structure
+
+```text
+src/
+  app/
+    layout.tsx              ← root layout (fonts, metadata)
+    page.tsx                ← landing page
+    globals.css             ← design tokens, layout, component styles
+    legal/
+      page.tsx              ← legal index + privacy/legal notice
+      privacy/
+        page.tsx            ← privacy policy
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev      # start dev server
+npm run build    # production build
+npm run start    # serve production build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Legal Pages
 
-## Learn More
+- [Privacy Policy](https://boilerhaus.org/legal/privacy)
+- [Legal Notice](https://boilerhaus.org/legal)
 
-To learn more about Next.js, take a look at the following resources:
+## Ownership
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [docs/WEBSITE-OWNERSHIP.md](docs/WEBSITE-OWNERSHIP.md) for domain, hosting, and access details.
