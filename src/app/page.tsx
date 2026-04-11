@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 // ── Inline Badge ──────────────────────────────────────────────────────────
 function BhBadge({ children }: { children: React.ReactNode }) {
@@ -111,6 +112,7 @@ const products = [
     copy: "A structured control layer for residential renovation projects — scope, budget, schedule, decisions, and change tracking in one shared record.",
     badge: "coming soon" as const,
     href: "https://github.com/BoilerHAUS/ScopeHouse",
+    image: "/product-scopehouse.webp",
   },
   {
     name: "boilerhaus-ui",
@@ -118,6 +120,7 @@ const products = [
     copy: "A Bauhaus-inspired design system for all boilerhaus products. Tokens, components, and patterns published as an open-source npm package.",
     badge: "in progress" as const,
     href: "https://github.com/BoilerHAUS/boilerhaus-ui",
+    image: "/product-boilerhaus-ui.webp",
   },
   {
     name: "claude-eats",
@@ -125,6 +128,7 @@ const products = [
     copy: "A self-hosted weekly dinner planner powered by Claude AI. Plan meals, generate shopping lists, and reduce decision fatigue — running on your own infrastructure.",
     badge: "complete" as const,
     href: "https://github.com/BoilerHAUS/claude-eats",
+    image: "/product-claude-eats.webp",
   },
   {
     name: "moltch",
@@ -132,6 +136,7 @@ const products = [
     copy: "The output and relay layer for boilerhaus agents. moltch handles shareable command output, multi-agent message routing, and structured execution logs.",
     badge: "coming soon" as const,
     href: "https://github.com/BoilerHAUS/moltch",
+    image: "/product-moltch.webp",
   },
 ];
 
@@ -158,6 +163,39 @@ const agents = [
     human: false,
   },
 ];
+
+// ── Scroll reveal hook ────────────────────────────────────────────────────
+function useReveal(): [React.RefObject<HTMLDivElement | null>, boolean] {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return [ref, visible];
+}
+
+function Reveal({ children, className }: { children: React.ReactNode; className?: string }) {
+  const [ref, visible] = useReveal();
+  return (
+    <div ref={ref} className={`reveal ${visible ? "visible" : ""} ${className ?? ""}`}>
+      {children}
+    </div>
+  );
+}
 
 // ── Theme toggle ──────────────────────────────────────────────────────────
 function useTheme() {
@@ -231,6 +269,17 @@ export default function Home() {
       <main id="top">
         {/* ── Hero ── */}
         <section className="hero-section shell">
+          <div className="hero-bg" aria-hidden="true">
+            <Image
+              src="/hero-bauhaus.webp"
+              alt=""
+              fill
+              className="hero-bg-image"
+              priority
+              quality={80}
+            />
+          </div>
+
           <div className="hero-copy">
             <p className="section-tag">Agentic development platform</p>
             <h1 className="hero-headline">
@@ -275,11 +324,13 @@ export default function Home() {
             </div>
             <div className="principles-grid">
               {principles.map((p) => (
-                <div key={p.index} className="principle-card">
-                  <p className="principle-index">{p.index}</p>
-                  <h3 className="principle-title">{p.title}</h3>
-                  <p className="principle-copy">{p.copy}</p>
-                </div>
+                <Reveal key={p.index}>
+                  <div className="principle-card">
+                    <p className="principle-index">{p.index}</p>
+                    <h3 className="principle-title">{p.title}</h3>
+                    <p className="principle-copy">{p.copy}</p>
+                  </div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -305,6 +356,16 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
+                  <div className="product-image-wrapper">
+                    <Image
+                      className="product-image"
+                      src={product.image}
+                      alt={`${product.name} — ${product.subtitle}`}
+                      width={480}
+                      height={360}
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
                   <div className="product-eyebrow">
                     <p className="product-subtitle">{product.subtitle}</p>
                     <BhBadge>{product.badge}</BhBadge>
@@ -333,18 +394,19 @@ export default function Home() {
             </div>
             <div className="agents-grid">
               {agents.map((agent) => (
-                <a
-                  key={agent.name}
-                  className={`agent-card${agent.human ? " agent-card--human" : ""}`}
-                  href={agent.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <p className="agent-role">{agent.role}</p>
-                  <h3 className="agent-name">{agent.name}</h3>
-                  <p className="agent-copy">{agent.copy}</p>
-                  <span className="agent-link">GitHub profile ↗</span>
-                </a>
+                <Reveal key={agent.name}>
+                  <a
+                    className={`agent-card${agent.human ? " agent-card--human" : ""}`}
+                    href={agent.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <p className="agent-role">{agent.role}</p>
+                    <h3 className="agent-name">{agent.name}</h3>
+                    <p className="agent-copy">{agent.copy}</p>
+                    <span className="agent-link">GitHub profile ↗</span>
+                  </a>
+                </Reveal>
               ))}
             </div>
           </div>
