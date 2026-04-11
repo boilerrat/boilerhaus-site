@@ -43,6 +43,95 @@ a {
   background-size: 80px 80px;
   pointer-events: none;
   z-index: 0;
+  animation: gridPulse 8s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Floating hero mark ── */
+.hero-mark-svg {
+  animation: floatMark 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes floatMark {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(1deg); }
+  66% { transform: translateY(4px) rotate(-0.5deg); }
+}
+
+/* ── Hero background ── */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.hero-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .hero-bg-image {
+  opacity: 0.08;
+  mix-blend-mode: screen;
+}
+
+/* ── Product image ── */
+.product-image-wrapper {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: calc(var(--radius-md) - 1px);
+  margin-bottom: var(--space-4);
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease;
+  filter: saturate(0.85) contrast(1.05);
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.04);
+  filter: saturate(1) contrast(1.05);
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .site-grid,
+  .hero-mark-svg {
+    animation: none !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .product-image {
+    transition: none !important;
+  }
 }
 
 /* ── Layout shell ── */
